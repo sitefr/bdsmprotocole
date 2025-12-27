@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanctuaire de la Dame Supérieure</title>
+    <style>
+        /* --- DESIGN GLOBAL --- */
+        body {
+            background-color: #0a0a0a; /* Encore plus sombre */
+            color: #e0e0e0;
+            font-family: 'Georgia', serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* --- EN-TÊTE --- */
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            border-bottom: 3px solid #8a0303;
+            width: 100%;
+            max-width: 800px;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: #8a0303;
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(138, 3, 3, 0.3);
+        }
+
+        p.subtitle {
+            font-style: italic;
+            color: #999;
+            letter-spacing: 1px;
+        }
+
+        /* --- NOUVEAUX DESIGNS ABSTRAITS (CSS PURE) --- */
+        .design-container {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin: 20px 0 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .design-box {
+            width: 150px;
+            height: 220px;
+            border: 2px solid #333;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+            transition: all 0.4s ease;
+        }
+
+        .design-box:hover {
+            border-color: #8a0303;
+            box-shadow: 0 0 15px rgba(138, 3, 3, 0.4), inset 0 0 20px rgba(0,0,0,0.8);
+        }
+
+        /* Design 1 : Rayures verticales sombres (évoque barreaux/rigueur) */
+        .pattern-1 {
+            background: repeating-linear-gradient(
+                90deg,
+                #111,
+                #111 10px,
+                #0a0a0a 10px,
+                #0a0a0a 20px
+            );
+        }
+
+        /* Design 2 : Croix diagonales subtiles (évoque liens/interdit) */
+        .pattern-2 {
+            background-color: #111;
+            background-image: 
+                linear-gradient(45deg, transparent 48%, #3a0000 48%, #3a0000 52%, transparent 52%),
+                linear-gradient(-45deg, transparent 48%, #3a0000 48%, #3a0000 52%, transparent 52%);
+            background-size: 30px 30px;
+        }
+
+        /* Design 3 : Texture dégradée profonde (évoque cuir/profondeur) */
+        .pattern-3 {
+            background: radial-gradient(circle at center, #2a2a2a 0%, #000000 80%);
+        }
+
+
+        /* --- FORMULAIRE --- */
+        .form-container {
+            background: linear-gradient(145deg, #1a1a1a, #111);
+            padding: 40px;
+            border-radius: 4px;
+            border: 1px solid #333;
+            border-top: 3px solid #8a0303;
+            width: 90%;
+            max-width: 500px;
+            margin-bottom: 50px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #d4d4d4;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        input[type="text"], input[type="email"], textarea {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 25px;
+            background-color: #222;
+            border: 1px solid #444;
+            color: white;
+            box-sizing: border-box;
+            transition: border 0.3s;
+        }
+        
+        input:focus {
+            border-color: #8a0303;
+            outline: none;
+            background-color: #2a2a2a;
+        }
+
+        /* --- CHECKBOXES PRATIQUES --- */
+        .practices {
+            margin-bottom: 25px;
+            padding: 15px;
+            background-color: #151515;
+            border: 1px solid #2a2a2a;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            cursor: pointer;
+            font-weight: normal;
+            text-transform: none;
+            color: #bbb;
+            transition: color 0.3s;
+        }
+
+        .checkbox-group:hover {
+            color: #8a0303;
+        }
+
+        .checkbox-group input {
+            margin-right: 12px;
+            accent-color: #8a0303;
+            transform: scale(1.3);
+            cursor: pointer;
+        }
+
+        /* --- CONFIRMATION OFFRANDE --- */
+        .payment-confirmation {
+            margin-top: 25px;
+            padding: 20px;
+            background-color: rgba(138, 3, 3, 0.1); /* Fond rouge très léger */
+            border: 1px solid #8a0303;
+            color: #ffcccc;
+            font-weight: bold;
+        }
+
+        /* --- BOUTON --- */
+        button {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(to bottom, #8a0303, #660000);
+            color: white;
+            border: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            transition: all 0.3s;
+            margin-top: 15px;
+            border-radius: 2px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        button:hover {
+            background: linear-gradient(to bottom, #a30000, #8a0303);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(138, 3, 3, 0.3);
+        }
+        
+        button:active {
+            transform: translateY(1px);
+        }
+
+        /* --- MESSAGE DE CONFIRMATION --- */
+        #status {
+            margin-top: 25px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.5rem;
+            min-height: 1.5em;
+        }
+
+        .success {
+            color: #00ff00;
+            text-shadow: 0 0 10px #00ff00;
+            animation: pulse 1.5s infinite alternate;
+        }
+        
+        @keyframes pulse {
+            from { text-shadow: 0 0 10px #00ff00; }
+            to { text-shadow: 0 0 20px #00ff00, 0 0 30px #00ff00; }
+        }
+        
+        .error {
+            color: #ff3333;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Protocole de Soumission</h1>
+        <p class="subtitle">Remplissez ce formulaire pour offrir votre dévotion.</p>
+    </header>
+
+    <div class="design-container">
+        <div class="design-box pattern-1" title="Rigueur"></div>
+        <div class="design-box pattern-2" title="Liens"></div>
+        <div class="design-box pattern-3" title="Profondeur"></div>
+    </div>
+
+    <div class="form-container">
+        <form id="bdsmForm" action="https://formspree.io/f/mjgvwnpw" method="POST">
+            
+            <label for="nom">Nom du Soumis :</label>
+            <input type="text" id="nom" name="Nom" required>
+
+            <label for="prenom">Prénom du Soumis :</label>
+            <input type="text" id="prenom" name="Prenom" required>
+
+            <label for="email">Email de contact :</label>
+            <input type="email" id="email" name="email" required>
+
+            <label>Pratiques acceptées / désirées :</label>
+            <div class="practices">
+                <label class="checkbox-group">
+                    <input type="checkbox" name="Pratiques" value="Bondage">
+                    Bondage / Shibari
+                </label>
+                <label class="checkbox-group">
+                    <input type="checkbox" name="Pratiques" value="Discipline">
+                    Discipline & Punition
+                </label>
+                <label class="checkbox-group">
+                    <input type="checkbox" name="Pratiques" value="Cuir/Latex">
+                    Culte du Cuir / Latex
+                </label>
+                <label class="checkbox-group">
+                    <input type="checkbox" name="Pratiques" value="Domination Verbale">
+                    Domination Verbale / Humiliation
+                </label>
+                 <label class="checkbox-group">
+                    <input type="checkbox" name="Pratiques" value="Service">
+                    Service Domestique
+                </label>
+            </div>
+
+            <div class="payment-confirmation">
+                <label class="checkbox-group" style="margin-bottom: 0; color: #ffcccc;">
+                    <input type="checkbox" name="Offrande_50eur" value="Oui" required>
+                    Je valide aussi mon offrande de dévouement de 50 euro.
+                </label>
+            </div>
+
+            <button type="submit">Envoyer l'Offrande</button>
+        </form>
+
+        <div id="status"></div>
+    </div>
+
+    <script>
+        var form = document.getElementById("bdsmForm");
+        
+        async function handleSubmit(event) {
+            event.preventDefault();
+            var status = document.getElementById("status");
+            var data = new FormData(event.target);
+
+            fetch(event.target.action, {
+                method: form.method,
+                body: data,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    status.innerHTML = "ENVOYÉ";
+                    status.className = "success";
+                    form.reset(); 
+                } else {
+                    response.json().then(data => {
+                        if (Object.hasOwn(data, 'errors')) {
+                            status.innerHTML = data["errors"].map(error => error["message"]).join(", ");
+                        } else {
+                            status.innerHTML = "Une erreur s'est produite.";
+                        }
+                        status.className = "error";
+                    })
+                }
+            }).catch(error => {
+                status.innerHTML = "Erreur de connexion.";
+                status.className = "error";
+            });
+        }
+        form.addEventListener("submit", handleSubmit);
+    </script>
+
+</body>
+</html>
