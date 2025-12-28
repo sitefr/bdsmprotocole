@@ -6,9 +6,7 @@
     <title>Sanctuaire de Dominatrice Mariana</title>
     <style>
         /* --- RESET & GLOBAL --- */
-        * {
-            box-sizing: border-box; /* Crucial pour le responsive */
-        }
+        * { box-sizing: border-box; }
 
         body {
             background-color: #0a0a0a;
@@ -17,7 +15,65 @@
             margin: 0;
             padding: 0;
             overflow-x: hidden;
-            font-size: 16px; /* Taille de base pour lecture mobile */
+            font-size: 16px;
+        }
+
+        /* --- ECRAN DE PREVENTION -18 ANS (POPUP) --- */
+        #age-verification {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000000;
+            z-index: 9999; /* Au-dessus de tout le reste */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            flex-direction: column;
+        }
+
+        .age-box {
+            background-color: #111;
+            border: 3px solid #8a0303;
+            padding: 30px;
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+            border-radius: 4px;
+            box-shadow: 0 0 50px rgba(138, 3, 3, 0.5);
+        }
+
+        .warning-sign {
+            color: #ff0000;
+            font-size: 4rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .age-title {
+            color: #fff;
+            text-transform: uppercase;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .age-text {
+            color: #ccc;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .age-18 {
+            font-weight: bold;
+            color: #8a0303;
+            font-size: 1.2rem;
+            border: 1px solid #8a0303;
+            padding: 5px 10px;
+            display: inline-block;
+            margin-bottom: 20px;
         }
 
         /* --- BARRE DE NAVIGATION --- */
@@ -27,7 +83,7 @@
             padding: 15px 20px;
             display: flex;
             align-items: center;
-            justify-content: space-between; /* Espacement mieux géré */
+            justify-content: space-between;
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -38,7 +94,7 @@
             font-size: 28px;
             cursor: pointer;
             color: #8a0303;
-            padding: 5px; /* Zone de clic plus large */
+            padding: 5px;
         }
 
         .site-title {
@@ -49,7 +105,7 @@
             font-weight: bold;
         }
 
-        /* --- MENU LATÉRAL (Mobile Friendly) --- */
+        /* --- MENU LATÉRAL --- */
         .side-menu {
             height: 100%;
             width: 0;
@@ -66,7 +122,7 @@
         }
 
         .side-menu a {
-            padding: 20px 30px; /* Plus d'espace pour les doigts */
+            padding: 20px 30px;
             text-decoration: none;
             font-size: 1.2rem;
             color: #ccc;
@@ -96,24 +152,22 @@
             display: none;
             flex-direction: column;
             align-items: center;
-            padding: 20px 15px; /* Marges réduites sur les côtés */
+            padding: 20px 15px;
             animation: fadeIn 0.5s;
             width: 100%;
         }
 
-        .active-page {
-            display: flex;
-        }
+        .active-page { display: flex; }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- TYPOGRAPHIE RESPONSIVE --- */
+        /* --- TYPOGRAPHIE --- */
         h1 {
             color: #8a0303;
-            font-size: 1.8rem; /* Plus petit pour mobile */
+            font-size: 1.8rem;
             text-transform: uppercase;
             letter-spacing: 2px;
             margin-bottom: 10px;
@@ -139,38 +193,21 @@
             padding: 0 10px;
         }
 
-        /* --- BOITES (CONTRAT & FORMULAIRE) --- */
+        /* --- BOITES --- */
         .contract-box, .form-container {
             background-color: #151515;
             width: 100%;
-            max-width: 600px; /* Max sur PC */
+            max-width: 600px;
             box-shadow: 0 0 20px rgba(0,0,0,0.7);
             margin-bottom: 50px;
             border-radius: 4px;
         }
 
-        .contract-box {
-            border: 2px solid #5c5c5c; /* Bordure simplifiée pour mobile */
-            padding: 25px;
-        }
+        .contract-box { border: 2px solid #5c5c5c; padding: 25px; }
+        .form-container { padding: 25px; border: 1px solid #333; border-top: 3px solid #8a0303; }
 
-        .form-container {
-            padding: 25px;
-            border: 1px solid #333;
-            border-top: 3px solid #8a0303;
-        }
-
-        .contract-text {
-            text-align: left; /* Justifié fait des trous sur mobile, left est mieux */
-            line-height: 1.6;
-            margin-bottom: 20px;
-            font-size: 1rem;
-        }
-
-        .contract-highlight {
-            color: #ffcccc;
-            font-weight: bold;
-        }
+        .contract-text { text-align: left; line-height: 1.6; margin-bottom: 20px; font-size: 1rem; }
+        .contract-highlight { color: #ffcccc; font-weight: bold; }
 
         .price-tag {
             font-size: 1.4rem;
@@ -181,22 +218,18 @@
             border: 1px solid #8a0303;
             padding: 15px;
             background-color: rgba(138, 3, 3, 0.1);
-            line-height: 1.4;
         }
 
         /* --- INPUTS & BUTTONS --- */
-        input[type="text"], 
-        input[type="email"], 
-        textarea {
+        input[type="text"], input[type="email"], textarea {
             width: 100%;
-            padding: 14px; /* Plus grand pour les doigts */
+            padding: 14px;
             margin-bottom: 20px;
             background-color: #222;
             border: 1px solid #444;
             color: white;
             border-radius: 4px;
-            font-size: 16px; /* Évite le zoom automatique sur iPhone */
-            font-family: sans-serif; /* Plus lisible pour taper */
+            font-size: 16px;
         }
 
         input:focus, textarea:focus {
@@ -205,17 +238,11 @@
             background-color: #2a2a2a;
         }
 
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: #d4d4d4;
-            font-size: 0.95rem;
-        }
+        label { display: block; margin-bottom: 8px; font-weight: bold; color: #d4d4d4; font-size: 0.95rem; }
 
         button {
             width: 100%;
-            padding: 18px; /* Bouton bien large */
+            padding: 18px;
             background: linear-gradient(to bottom, #8a0303, #500000);
             color: white;
             border: none;
@@ -226,74 +253,63 @@
             margin-top: 10px;
             font-weight: bold;
             border-radius: 4px;
-            touch-action: manipulation; /* Optimise le tap */
         }
 
-        button:active {
-            transform: scale(0.98);
-        }
-
-        /* --- CHECKBOXES OPTIMISÉES --- */
+        /* --- CHECKBOXES --- */
         .checkbox-group {
             display: flex;
-            align-items: flex-start; /* Aligne en haut si le texte est long */
+            align-items: flex-start;
             margin-bottom: 15px;
             cursor: pointer;
             color: #bbb;
             padding: 5px 0;
         }
-        
         .checkbox-group input {
-            min-width: 20px; /* Taille fixe */
-            min-height: 20px; /* Taille fixe */
-            margin-right: 15px;
-            margin-top: 2px;
-            accent-color: #8a0303;
-        }
-        
-        .checkbox-group span, .checkbox-group label {
-            line-height: 1.4;
+            min-width: 20px; min-height: 20px; margin-right: 15px; margin-top: 2px; accent-color: #8a0303;
         }
 
         /* --- DESIGNS ABSTRAITS --- */
         .design-container {
             display: flex;
             justify-content: center;
-            flex-wrap: wrap; /* Permet de passer à la ligne sur petit écran */
+            flex-wrap: wrap;
             gap: 20px;
             margin-bottom: 40px;
         }
-        .design-box {
-            width: 80px; 
-            height: 120px; 
-            border: 1px solid #333; 
-            background: #111;
-        }
+        .design-box { width: 80px; height: 120px; border: 1px solid #333; background: #111; }
         .pattern-1 { background: repeating-linear-gradient(90deg, #111, #111 5px, #222 5px, #222 10px); }
         .pattern-2 { background: radial-gradient(circle, #330000 10%, transparent 10%), #111; background-size: 20px 20px; }
 
         /* --- MESSAGES STATUT --- */
-        .status-msg {
-            margin-top: 20px;
-            text-align: center;
-            font-weight: bold;
-            font-size: 1.1rem;
-            padding: 10px;
-        }
+        .status-msg { margin-top: 20px; text-align: center; font-weight: bold; font-size: 1.1rem; padding: 10px; }
         .success { color: #00ff00; border: 1px solid #00ff00; background: rgba(0,255,0,0.05); }
         .error { color: #ff4444; border: 1px solid #ff4444; }
 
-        /* --- MEDIA QUERIES (Règles spécifiques PC) --- */
         @media screen and (min-width: 768px) {
             h1 { font-size: 2.5rem; }
             .contract-box { padding: 40px; border-width: 4px; border-style: double; }
             .form-container { padding: 40px; }
             .design-box { width: 100px; height: 150px; }
         }
-
     </style>
 </head>
 <body>
+
+    <div id="age-verification">
+        <div class="age-box">
+            <span class="warning-sign">⚠️</span>
+            <div class="age-title">Accès Restreint</div>
+            <p class="age-text">
+                Ce site contient du matériel à caractère BDSM, de domination financière et de fétichisme.<br><br>
+                L'accès est strictement réservé aux adultes consentants.
+            </p>
+            <div class="age-18">- INTERDIT AUX MINEURS -</div>
+            
+            <button onclick="enterSite()">Je certifie avoir 18 ans ou plus</button>
+            <br>
+            <a href="https://www.google.com" style="color: #666; text-decoration: none; margin-top: 15px; display: block; font-size: 0.9rem;">Sortir du site</a>
+        </div>
+    </div>
 
     <div class="nav-bar">
         <div class="hamburger" onclick="openNav()">&#9776;</div>
@@ -413,10 +429,14 @@
     </div>
 
     <script>
+        // FONCTION POUR ENTRER SUR LE SITE (CACHE LE POPUP)
+        function enterSite() {
+            document.getElementById("age-verification").style.display = "none";
+        }
+
         // GESTION DU MENU
         function openNav() {
             var menu = document.getElementById("mySidenav");
-            // Sur mobile, le menu prend 80% de l'écran, sur PC 250px
             if(window.innerWidth < 600) {
                 menu.style.width = "85%";
             } else {
@@ -430,18 +450,16 @@
 
         // NAVIGATION ENTRE PAGES
         function showPage(pageId) {
-            // Masquer toutes les pages
             var pages = document.getElementsByClassName("page-content");
             for (var i = 0; i < pages.length; i++) {
                 pages[i].style.display = "none";
                 pages[i].classList.remove("active-page");
             }
-            // Afficher la page demandée
             var active = document.getElementById(pageId);
             active.style.display = "flex";
             active.classList.add("active-page");
-            closeNav(); // Ferme le menu auto
-            window.scrollTo(0,0); // Remonte en haut de la page
+            closeNav();
+            window.scrollTo(0,0);
         }
 
         // GESTION DES FORMULAIRES
