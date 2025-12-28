@@ -26,7 +26,7 @@
             width: 100%;
             height: 100%;
             background-color: #000000;
-            z-index: 9999; /* Au-dessus de tout le reste */
+            z-index: 9999;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -256,13 +256,20 @@
         }
 
         /* --- CHECKBOXES --- */
+        .practices-section {
+            background-color: #1a1a1a;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #333;
+        }
+
         .checkbox-group {
             display: flex;
             align-items: flex-start;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             cursor: pointer;
             color: #bbb;
-            padding: 5px 0;
+            padding: 2px 0;
         }
         .checkbox-group input {
             min-width: 20px; min-height: 20px; margin-right: 15px; margin-top: 2px; accent-color: #8a0303;
@@ -300,7 +307,7 @@
             <span class="warning-sign">⚠️</span>
             <div class="age-title">Accès Restreint</div>
             <p class="age-text">
-                Ce site contient du matériel à caractère BDSM, de domination et de fétichisme.<br><br>
+                Ce site contient du matériel à caractère BDSM, de domination financière et de fétichisme.<br><br>
                 L'accès est strictement réservé aux adultes consentants.
             </p>
             <div class="age-18">- INTERDIT AUX MINEURS -</div>
@@ -346,8 +353,40 @@
                 <label>Email :</label>
                 <input type="email" name="Email" required placeholder="votre@email.com">
 
+                <label>Intérêts & Fétichismes :</label>
+                <div class="practices-section">
+                    <div class="checkbox-group">
+                        <input type="checkbox" name="Pratique" value="ABDL">
+                        <label>ABDL / Diaper Lover / Régression</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" name="Pratique" value="Feminisation">
+                        <label>Féminisation / Transformation (Sissy)</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" name="Pratique" value="Bondage">
+                        <label>Bondage / Shibari / Cordes</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" name="Pratique" value="Discipline">
+                        <label>Discipline / Spanking / Impact</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" name="Pratique" value="Humiliation">
+                        <label>Humiliation Verbale / Dégradation</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" name="Pratique" value="Service">
+                        <label>Service Domestique / Tâches</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" name="Pratique" value="Autre">
+                        <label>Autres (à préciser par message plus tard)</label>
+                    </div>
+                </div>
+
                 <label>Offrande initiale (50€) :</label>
-                <div class="checkbox-group">
+                <div class="checkbox-group" style="border-top: 1px solid #444; padding-top: 15px;">
                     <input type="checkbox" name="Offrande_50eur" value="Oui" required>
                     <label>Je valide mon offrande de dévouement de 50€.</label>
                 </div>
@@ -366,19 +405,14 @@
 
         <div class="contract-box">
             <p class="contract-text">
-                <strong>ENTRE :</strong><br>
-                Dame Supérieure MARIANA (ci-après "La Propriétaire")<br>
-                ET<br>
-                Le soussigné (ci-après "L'Objet").
+                <strong>OBJET DU CONTRAT : TRANSFERT D'AUTORITÉ</strong><br>
+                Par la présente convention, le Soumis renonce volontairement à son droit à l'autodétermination au profit exclusif de la Dominante.
+                Ce contrat scelle la transition du statut d'individu libre à celui de <em>Propriété</em>. Il établit un cadre relationnel strict au sein duquel la volonté de la Dominante se substitue intégralement à celle du Soumis, dans un but de dressage, de service et d'usage total.
             </p>
 
             <p class="contract-text">
-                <strong>OBJET DU CONTRAT :</strong><br>
-               Par la présente convention, le Soumis renonce volontairement et en pleine conscience à son droit à l'autodétermination au profit exclusif de la Dominante.
-
-Ce contrat scelle la transition du statut d'individu libre à celui de Propriété. Il établit un cadre relationnel strict de type Maîtresse/esclave au sein duquel la volonté de la Dominante se substitue intégralement à celle du Soumis.
-
-L'objet de cet accord est la mise à disposition totale du corps et de l'esprit du Soumis à des fins de dressage, de service domestique, d'usage ludique et d'expérimentation sensorielle, selon le seul bon vouloir de Dame Supérieure Mariana. Cet acte est scellé par une transaction irrévocable.
+                <strong>CONDITIONS :</strong><br>
+                Par la présente, l'Objet cède volontairement son autorité, sa volonté et sa gestion financière à la Propriétaire. Cet acte est scellé par une transaction irrévocable.
             </p>
 
             <div class="price-tag">
@@ -506,4 +540,3 @@ L'objet de cet accord est la mise à disposition totale du corps et de l'esprit 
 
 </body>
 </html>
-
