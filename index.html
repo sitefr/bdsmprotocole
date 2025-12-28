@@ -12,7 +12,71 @@
             font-family: 'Georgia', serif;
             margin: 0;
             padding: 0;
-            overflow-x: hidden; /* Empêche le scroll horizontal */
+            /* On bloque le scroll tant que l'âge n'est pas validé */
+            overflow: hidden; 
+        }
+
+        /* --- AGE GATE (VERIFICATION) --- */
+        #age-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000000;
+            z-index: 9999; /* Au-dessus de tout */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .age-content {
+            border: 2px solid #8a0303;
+            padding: 40px;
+            background-color: #111;
+            box-shadow: 0 0 50px rgba(138, 3, 3, 0.5);
+            max-width: 500px;
+        }
+
+        .age-warning {
+            color: #ff0000;
+            font-weight: bold;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .age-buttons button {
+            margin: 10px 0;
+            width: 100%;
+        }
+
+        .btn-enter {
+            background-color: #8a0303;
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        .btn-exit {
+            background-color: #333;
+            color: #888;
+            border: 1px solid #555;
+            padding: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .btn-exit:hover {
+            background-color: #eee;
+            color: #000;
         }
 
         /* --- MENU NAVIGATION (HAMBURGER) --- */
@@ -42,7 +106,7 @@
             color: #fff;
         }
 
-        /* Le menu déroulant (caché par défaut) */
+        /* Le menu déroulant */
         .side-menu {
             height: 100%;
             width: 0;
@@ -93,11 +157,11 @@
 
         /* --- CONTENU --- */
         .page-content {
-            display: none; /* Caché par défaut, géré par JS */
+            display: none; /* Caché par défaut */
             flex-direction: column;
             align-items: center;
             padding: 20px;
-            animation: fadeIn 0.5s;
+            animation: fadeIn 0.8s;
         }
 
         .active-page {
@@ -109,7 +173,6 @@
             to { opacity: 1; }
         }
 
-        /* --- STYLES COMMUNS --- */
         h1 {
             color: #8a0303;
             font-size: 2rem;
@@ -203,6 +266,7 @@
             letter-spacing: 2px;
             margin-top: 20px;
             font-weight: bold;
+            transition: 0.3s;
         }
 
         button:hover {
@@ -224,7 +288,7 @@
             transform: scale(1.3);
         }
 
-        /* --- DESIGNS ABSTRAITS (ACCUEIL) --- */
+        /* --- DESIGNS ABSTRAITS --- */
         .design-container {
             display: flex;
             justify-content: center;
@@ -232,10 +296,7 @@
             margin-bottom: 40px;
         }
         .design-box {
-            width: 100px; 
-            height: 150px; 
-            border: 1px solid #333; 
-            background: #111;
+            width: 100px; height: 150px; border: 1px solid #333; background: #111;
         }
         .pattern-1 { background: repeating-linear-gradient(90deg, #111, #111 5px, #222 5px, #222 10px); }
         .pattern-2 { background: radial-gradient(circle, #330000 10%, transparent 10%), #111; background-size: 20px 20px; }
@@ -253,6 +314,22 @@
     </style>
 </head>
 <body>
+
+    <div id="age-modal">
+        <div class="age-content">
+            <div class="age-warning">⚠️ Avertissement Légal ⚠️</div>
+            <p style="margin-bottom: 20px;">
+                Vous êtes sur le point d'entrer dans le Sanctuaire de Dominatrice Mariana.
+                <br><br>
+                Ce site contient des thématiques liées à la domination financière et au BDSM.
+                L'accès est strictement réservé aux personnes majeures (18+).
+            </p>
+            <div class="age-buttons">
+                <button class="btn-enter" onclick="enterSite()">J'ai 18 ans ou plus - J'entre</button>
+                <button class="btn-exit" onclick="exitSite()">Je suis mineur - Sortir</button>
+            </div>
+        </div>
+    </div>
 
     <div class="nav-bar">
         <div class="hamburger" onclick="openNav()">&#9776;</div>
@@ -358,7 +435,7 @@
 
                 <br>
                 <label>Limites strictes (Hard limits) :</label>
-                <textarea name="Limites" placeholder="Listez ici ce que vous refusez absolument (ex: scat, sang...)." rows="3"></textarea>
+                <textarea name="Limites" placeholder="Listez ici ce que vous refusez absolument." rows="3"></textarea>
 
                 <div class="checkbox-group" style="margin-top:20px; border-top:1px solid #444; padding-top:20px;">
                     <input type="checkbox" name="VALIDATION_350" value="OUI" required>
@@ -372,7 +449,20 @@
     </div>
 
     <script>
-        // GESTION DU MENU
+        // --- FONCTIONS AGE GATE ---
+        function enterSite() {
+            // Cache le popup
+            document.getElementById("age-modal").style.display = "none";
+            // Réactive le scroll de la page
+            document.body.style.overflow = "auto";
+        }
+
+        function exitSite() {
+            // Redirige vers Google
+            window.location.href = "https://www.google.com";
+        }
+
+        // --- MENU ET NAVIGATION ---
         function openNav() {
             document.getElementById("mySidenav").style.width = "250px";
         }
@@ -381,22 +471,19 @@
             document.getElementById("mySidenav").style.width = "0";
         }
 
-        // NAVIGATION ENTRE PAGES
         function showPage(pageId) {
-            // Masquer toutes les pages
             var pages = document.getElementsByClassName("page-content");
             for (var i = 0; i < pages.length; i++) {
                 pages[i].style.display = "none";
                 pages[i].classList.remove("active-page");
             }
-            // Afficher la page demandée
             var active = document.getElementById(pageId);
             active.style.display = "flex";
             active.classList.add("active-page");
-            closeNav(); // Ferme le menu auto
+            closeNav();
         }
 
-        // GESTION DES FORMULAIRES (AJAX pour ne pas recharger)
+        // --- GESTION DES FORMULAIRES ---
         async function handleForm(event, statusId) {
             event.preventDefault();
             var status = document.getElementById(statusId);
@@ -422,7 +509,6 @@
             });
         }
 
-        // Attacher les événements aux deux formulaires
         document.getElementById("contactForm").addEventListener("submit", function(e) {
             handleForm(e, "status-contact");
         });
