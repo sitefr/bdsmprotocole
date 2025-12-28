@@ -2,111 +2,54 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Sanctuaire de Dominatrice Mariana</title>
     <style>
-        /* --- DESIGN GLOBAL --- */
+        /* --- RESET & GLOBAL --- */
+        * {
+            box-sizing: border-box; /* Crucial pour le responsive */
+        }
+
         body {
             background-color: #0a0a0a;
             color: #e0e0e0;
             font-family: 'Georgia', serif;
             margin: 0;
             padding: 0;
-            /* On bloque le scroll tant que l'âge n'est pas validé */
-            overflow: hidden; 
+            overflow-x: hidden;
+            font-size: 16px; /* Taille de base pour lecture mobile */
         }
 
-        /* --- AGE GATE (VERIFICATION) --- */
-        #age-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #000000;
-            z-index: 9999; /* Au-dessus de tout */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .age-content {
-            border: 2px solid #8a0303;
-            padding: 40px;
-            background-color: #111;
-            box-shadow: 0 0 50px rgba(138, 3, 3, 0.5);
-            max-width: 500px;
-        }
-
-        .age-warning {
-            color: #ff0000;
-            font-weight: bold;
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .age-buttons button {
-            margin: 10px 0;
-            width: 100%;
-        }
-
-        .btn-enter {
-            background-color: #8a0303;
-            color: white;
-            border: none;
-            padding: 15px;
-            font-size: 1.2rem;
-            cursor: pointer;
-            text-transform: uppercase;
-        }
-
-        .btn-exit {
-            background-color: #333;
-            color: #888;
-            border: 1px solid #555;
-            padding: 10px;
-            font-size: 1rem;
-            cursor: pointer;
-        }
-
-        .btn-exit:hover {
-            background-color: #eee;
-            color: #000;
-        }
-
-        /* --- MENU NAVIGATION (HAMBURGER) --- */
+        /* --- BARRE DE NAVIGATION --- */
         .nav-bar {
             background-color: #111;
             border-bottom: 2px solid #8a0303;
             padding: 15px 20px;
             display: flex;
             align-items: center;
+            justify-content: space-between; /* Espacement mieux géré */
             position: sticky;
             top: 0;
             z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.8);
         }
 
         .hamburger {
-            font-size: 30px;
+            font-size: 28px;
             cursor: pointer;
             color: #8a0303;
-            margin-right: 20px;
-            user-select: none;
+            padding: 5px; /* Zone de clic plus large */
         }
 
         .site-title {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
             color: #fff;
+            font-weight: bold;
         }
 
-        /* Le menu déroulant */
+        /* --- MENU LATÉRAL (Mobile Friendly) --- */
         .side-menu {
             height: 100%;
             width: 0;
@@ -119,19 +62,17 @@
             transition: 0.4s;
             padding-top: 60px;
             border-right: 2px solid #8a0303;
-            box-shadow: 5px 0 15px rgba(0,0,0,0.5);
+            box-shadow: 10px 0 20px rgba(0,0,0,0.8);
         }
 
         .side-menu a {
-            padding: 15px 30px;
+            padding: 20px 30px; /* Plus d'espace pour les doigts */
             text-decoration: none;
             font-size: 1.2rem;
             color: #ccc;
             display: block;
             transition: 0.3s;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
             border-bottom: 1px solid #333;
         }
 
@@ -144,24 +85,20 @@
             position: absolute;
             top: 10px;
             right: 20px;
-            font-size: 36px;
-            margin-left: 50px;
+            font-size: 40px;
             border: none;
-            background: none;
-        }
-        
-        .side-menu .closebtn:hover {
             background: none;
             color: #8a0303;
         }
 
         /* --- CONTENU --- */
         .page-content {
-            display: none; /* Caché par défaut */
+            display: none;
             flex-direction: column;
             align-items: center;
-            padding: 20px;
-            animation: fadeIn 0.8s;
+            padding: 20px 15px; /* Marges réduites sur les côtés */
+            animation: fadeIn 0.5s;
+            width: 100%;
         }
 
         .active-page {
@@ -169,18 +106,19 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
+        /* --- TYPOGRAPHIE RESPONSIVE --- */
         h1 {
             color: #8a0303;
-            font-size: 2rem;
+            font-size: 1.8rem; /* Plus petit pour mobile */
             text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             margin-bottom: 10px;
             text-align: center;
-            text-shadow: 0 0 10px rgba(138, 3, 3, 0.3);
+            line-height: 1.2;
         }
 
         h2 {
@@ -189,6 +127,7 @@
             padding-bottom: 10px;
             margin-top: 30px;
             width: 100%;
+            font-size: 1.4rem;
         }
 
         .subtitle {
@@ -196,21 +135,33 @@
             color: #999;
             text-align: center;
             margin-bottom: 30px;
+            font-size: 0.9rem;
+            padding: 0 10px;
         }
 
-        /* --- STYLE DU CONTRAT --- */
-        .contract-box {
+        /* --- BOITES (CONTRAT & FORMULAIRE) --- */
+        .contract-box, .form-container {
             background-color: #151515;
-            border: 4px double #5c5c5c;
-            padding: 40px;
-            width: 90%;
-            max-width: 700px;
+            width: 100%;
+            max-width: 600px; /* Max sur PC */
             box-shadow: 0 0 20px rgba(0,0,0,0.7);
             margin-bottom: 50px;
+            border-radius: 4px;
+        }
+
+        .contract-box {
+            border: 2px solid #5c5c5c; /* Bordure simplifiée pour mobile */
+            padding: 25px;
+        }
+
+        .form-container {
+            padding: 25px;
+            border: 1px solid #333;
+            border-top: 3px solid #8a0303;
         }
 
         .contract-text {
-            text-align: justify;
+            text-align: left; /* Justifié fait des trous sur mobile, left est mieux */
             line-height: 1.6;
             margin-bottom: 20px;
             font-size: 1rem;
@@ -222,29 +173,36 @@
         }
 
         .price-tag {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             color: #8a0303;
             font-weight: bold;
             text-align: center;
-            margin: 20px 0;
+            margin: 25px 0;
             border: 1px solid #8a0303;
-            padding: 10px;
+            padding: 15px;
+            background-color: rgba(138, 3, 3, 0.1);
+            line-height: 1.4;
         }
 
-        /* --- FORMULAIRES --- */
-        .form-container {
+        /* --- INPUTS & BUTTONS --- */
+        input[type="text"], 
+        input[type="email"], 
+        textarea {
             width: 100%;
-            max-width: 500px;
-        }
-
-        input, textarea {
-            width: 100%;
-            padding: 12px;
+            padding: 14px; /* Plus grand pour les doigts */
             margin-bottom: 20px;
             background-color: #222;
             border: 1px solid #444;
             color: white;
-            box-sizing: border-box;
+            border-radius: 4px;
+            font-size: 16px; /* Évite le zoom automatique sur iPhone */
+            font-family: sans-serif; /* Plus lisible pour taper */
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #8a0303;
+            background-color: #2a2a2a;
         }
 
         label {
@@ -252,11 +210,12 @@
             margin-bottom: 8px;
             font-weight: bold;
             color: #d4d4d4;
+            font-size: 0.95rem;
         }
 
         button {
             width: 100%;
-            padding: 15px;
+            padding: 18px; /* Bouton bien large */
             background: linear-gradient(to bottom, #8a0303, #500000);
             color: white;
             border: none;
@@ -264,39 +223,51 @@
             cursor: pointer;
             text-transform: uppercase;
             letter-spacing: 2px;
-            margin-top: 20px;
+            margin-top: 10px;
             font-weight: bold;
-            transition: 0.3s;
+            border-radius: 4px;
+            touch-action: manipulation; /* Optimise le tap */
         }
 
-        button:hover {
-            background: linear-gradient(to bottom, #a30000, #700000);
+        button:active {
+            transform: scale(0.98);
         }
 
-        /* --- CHECKBOXES --- */
+        /* --- CHECKBOXES OPTIMISÉES --- */
         .checkbox-group {
             display: flex;
-            align-items: center;
-            margin-bottom: 12px;
+            align-items: flex-start; /* Aligne en haut si le texte est long */
+            margin-bottom: 15px;
             cursor: pointer;
             color: #bbb;
+            padding: 5px 0;
         }
+        
         .checkbox-group input {
-            width: auto;
+            min-width: 20px; /* Taille fixe */
+            min-height: 20px; /* Taille fixe */
             margin-right: 15px;
+            margin-top: 2px;
             accent-color: #8a0303;
-            transform: scale(1.3);
+        }
+        
+        .checkbox-group span, .checkbox-group label {
+            line-height: 1.4;
         }
 
         /* --- DESIGNS ABSTRAITS --- */
         .design-container {
             display: flex;
             justify-content: center;
+            flex-wrap: wrap; /* Permet de passer à la ligne sur petit écran */
             gap: 20px;
             margin-bottom: 40px;
         }
         .design-box {
-            width: 100px; height: 150px; border: 1px solid #333; background: #111;
+            width: 80px; 
+            height: 120px; 
+            border: 1px solid #333; 
+            background: #111;
         }
         .pattern-1 { background: repeating-linear-gradient(90deg, #111, #111 5px, #222 5px, #222 10px); }
         .pattern-2 { background: radial-gradient(circle, #330000 10%, transparent 10%), #111; background-size: 20px 20px; }
@@ -306,30 +277,23 @@
             margin-top: 20px;
             text-align: center;
             font-weight: bold;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
+            padding: 10px;
         }
-        .success { color: #00ff00; text-shadow: 0 0 10px #00ff00; }
-        .error { color: red; }
+        .success { color: #00ff00; border: 1px solid #00ff00; background: rgba(0,255,0,0.05); }
+        .error { color: #ff4444; border: 1px solid #ff4444; }
+
+        /* --- MEDIA QUERIES (Règles spécifiques PC) --- */
+        @media screen and (min-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .contract-box { padding: 40px; border-width: 4px; border-style: double; }
+            .form-container { padding: 40px; }
+            .design-box { width: 100px; height: 150px; }
+        }
 
     </style>
 </head>
 <body>
-
-    <div id="age-modal">
-        <div class="age-content">
-            <div class="age-warning">⚠️ Avertissement Légal ⚠️</div>
-            <p style="margin-bottom: 20px;">
-                Vous êtes sur le point d'entrer dans le Sanctuaire de Dominatrice Mariana.
-                <br><br>
-                Ce site contient des thématiques liées à la domination financière et au BDSM.
-                L'accès est strictement réservé aux personnes majeures (18+).
-            </p>
-            <div class="age-buttons">
-                <button class="btn-enter" onclick="enterSite()">J'ai 18 ans ou plus - J'entre</button>
-                <button class="btn-exit" onclick="exitSite()">Je suis mineur - Sortir</button>
-            </div>
-        </div>
-    </div>
 
     <div class="nav-bar">
         <div class="hamburger" onclick="openNav()">&#9776;</div>
@@ -358,19 +322,19 @@
                 <input type="hidden" name="TYPE" value="CONTACT_INITIAL">
                 
                 <label>Nom :</label>
-                <input type="text" name="Nom" required>
+                <input type="text" name="Nom" required placeholder="Votre nom">
 
                 <label>Prénom :</label>
-                <input type="text" name="Prenom" required>
+                <input type="text" name="Prenom" required placeholder="Votre prénom">
 
                 <label>Email :</label>
-                <input type="email" name="Email" required>
+                <input type="email" name="Email" required placeholder="votre@email.com">
 
                 <label>Offrande initiale (50€) :</label>
-                <label class="checkbox-group">
+                <div class="checkbox-group">
                     <input type="checkbox" name="Offrande_50eur" value="Oui" required>
-                    Je valide mon offrande de dévouement de 50€.
-                </label>
+                    <label>Je valide mon offrande de dévouement de 50€.</label>
+                </div>
 
                 <button type="submit">Envoyer</button>
             </form>
@@ -398,7 +362,7 @@
             </p>
 
             <div class="price-tag">
-                MONTANT DU TRIBUT À VIE : 350,00 €
+                TRIBUT À VIE :<br>350,00 €
             </div>
 
             <form id="contractForm" action="https://formspree.io/f/mjgvwnpw" method="POST">
@@ -408,38 +372,38 @@
                 <input type="text" name="Signature_Nom" required placeholder="Votre nom officiel">
 
                 <label>Email de liaison :</label>
-                <input type="email" name="Email_Contrat" required>
+                <input type="email" name="Email_Contrat" required placeholder="votre@email.com">
 
                 <h2>Clauses & Limites</h2>
-                <p style="font-size:0.9rem; color:#888;">Cochez ce que vous acceptez d'offrir à Dominatrice Mariana :</p>
+                <p style="font-size:0.9rem; color:#888; margin-bottom: 20px;">Cochez ce que vous acceptez d'offrir :</p>
 
                 <div class="checkbox-group">
                     <input type="checkbox" name="Clause_Financiere" value="OUI" required>
-                    <span class="contract-highlight">CLAUSE FINANCIÈRE :</span> J'accepte que mes ressources servent les désirs de Maîtresse.
+                    <label><span class="contract-highlight">CLAUSE FINANCIÈRE :</span> J'accepte que mes ressources servent les désirs de Maîtresse.</label>
                 </div>
 
                 <div class="checkbox-group">
                     <input type="checkbox" name="Clause_Controle" value="OUI">
-                    <span>CONTRÔLE TOTAL :</span> Gestion du sommeil, nourriture et temps libre.
+                    <label><span>CONTRÔLE TOTAL :</span> Gestion du sommeil, nourriture et temps libre.</label>
                 </div>
 
                 <div class="checkbox-group">
                     <input type="checkbox" name="Clause_Humiliation" value="OUI">
-                    <span>HUMILIATION :</span> Acceptation de la dégradation verbale et psychologique.
+                    <label><span>HUMILIATION :</span> Acceptation de la dégradation verbale et psychologique.</label>
                 </div>
 
                 <div class="checkbox-group">
                     <input type="checkbox" name="Clause_Public" value="OUI">
-                    <span>EXPOSITION :</span> Droit d'utiliser mes messages/photos (sans visage) pour l'exemple.
+                    <label><span>EXPOSITION :</span> Droit d'utiliser mes messages/photos (sans visage) pour l'exemple.</label>
                 </div>
 
                 <br>
                 <label>Limites strictes (Hard limits) :</label>
-                <textarea name="Limites" placeholder="Listez ici ce que vous refusez absolument." rows="3"></textarea>
+                <textarea name="Limites" placeholder="Listez ici ce que vous refusez absolument..." rows="3"></textarea>
 
                 <div class="checkbox-group" style="margin-top:20px; border-top:1px solid #444; padding-top:20px;">
                     <input type="checkbox" name="VALIDATION_350" value="OUI" required>
-                    <strong style="color:#00ff00;">JE VALIDE LE PAIEMENT DE 350€ ET SIGNE CE CONTRAT.</strong>
+                    <label style="color:#00ff00; font-weight:bold;">JE VALIDE LE PAIEMENT DE 350€ ET SIGNE CE CONTRAT.</label>
                 </div>
 
                 <button type="submit">SCELLER LE CONTRAT</button>
@@ -449,46 +413,46 @@
     </div>
 
     <script>
-        // --- FONCTIONS AGE GATE ---
-        function enterSite() {
-            // Cache le popup
-            document.getElementById("age-modal").style.display = "none";
-            // Réactive le scroll de la page
-            document.body.style.overflow = "auto";
-        }
-
-        function exitSite() {
-            // Redirige vers Google
-            window.location.href = "https://www.google.com";
-        }
-
-        // --- MENU ET NAVIGATION ---
+        // GESTION DU MENU
         function openNav() {
-            document.getElementById("mySidenav").style.width = "250px";
+            var menu = document.getElementById("mySidenav");
+            // Sur mobile, le menu prend 80% de l'écran, sur PC 250px
+            if(window.innerWidth < 600) {
+                menu.style.width = "85%";
+            } else {
+                menu.style.width = "250px";
+            }
         }
 
         function closeNav() {
             document.getElementById("mySidenav").style.width = "0";
         }
 
+        // NAVIGATION ENTRE PAGES
         function showPage(pageId) {
+            // Masquer toutes les pages
             var pages = document.getElementsByClassName("page-content");
             for (var i = 0; i < pages.length; i++) {
                 pages[i].style.display = "none";
                 pages[i].classList.remove("active-page");
             }
+            // Afficher la page demandée
             var active = document.getElementById(pageId);
             active.style.display = "flex";
             active.classList.add("active-page");
-            closeNav();
+            closeNav(); // Ferme le menu auto
+            window.scrollTo(0,0); // Remonte en haut de la page
         }
 
-        // --- GESTION DES FORMULAIRES ---
+        // GESTION DES FORMULAIRES
         async function handleForm(event, statusId) {
             event.preventDefault();
             var status = document.getElementById(statusId);
             var form = event.target;
             var data = new FormData(form);
+
+            status.innerHTML = "Envoi en cours...";
+            status.className = "status-msg";
 
             fetch(form.action, {
                 method: form.method,
